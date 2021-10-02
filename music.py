@@ -1,3 +1,4 @@
+import asyncio
 import discord
 from discord.ext import commands
 
@@ -14,6 +15,50 @@ class music(commands.Cog):
         self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
         self.vc = ""
+
+
+    # @commands.Cog.listener()
+    # async def on_voice_state_update(self, ctx, *args):
+    #     # time = 0
+    #     # print("If listening")
+    #     # if not self.vc.is_playing:
+    #     #     while True:
+    #     #         await asyncio.sleep(1)
+    #     #         time = time+1
+    #     #         print(time)
+    #     #         if self.vc.is_playing:
+    #     #             time=0
+    #     #         if time==20:
+    #     #             await self.vc.disconnect()
+    #     #         if not self.vc.is_connected():
+    #     #             break
+    #     while self.vc.is_playing:
+    #         await asyncio.sleep(1)
+    #     else:
+    #         await asyncio.sleep(15)
+    #         while self.vc.is_playing:
+    #             break
+    #         else:
+    #             await self.vc.disconnect()
+    @commands.Cog.listener()
+    async def on_voice_state_update(self, member, before, after):
+        
+        if not member.id == self.bot.user.id:
+            return
+
+        elif before.channel is None:
+            voice = self.vc
+            time = 0
+            while True:
+                await asyncio.sleep(1)
+                time = time + 1
+                if voice.is_playing:
+                    time = 0
+                if time == 20:
+                    await voice.disconnect()
+                if not voice.is_connected():
+                    break
+
 
     def search_yt(self, item):
         with YoutubeDL(self.YDL_OPTIONS) as ydl:
@@ -61,12 +106,11 @@ class music(commands.Cog):
         
         voice_channel = ctx.author.voice.channel
         if voice_channel is None:
-            #you need to be connected so that the bot knows where to go
             await ctx.send("Connect to a voice channel!")
         else:
             song = self.search_yt(query)
             if type(song) == type(True):
-                await ctx.send("Could not download the song. Incorrect format try another keyword. This could be due to playlist or a livestream format.")
+                await ctx.send("Could not download the song. Incorrect format try another keyword.")
             else:
                 await ctx.send("Song added to the queue")
                 self.music_queue.append([song, voice_channel])
@@ -90,5 +134,29 @@ class music(commands.Cog):
     async def skip(self, ctx):
         if self.vc != "" and self.vc:
             self.vc.stop()
-            #try to play next in the queue if it exists
             await self.play_music()
+
+
+    @commands.command(name="l", help="Leaves if commanded to the voice channel")
+    async def leave(self, ctx, *args):
+        if self.vc.is_connected():
+            await self.vc.disconnect(force=True)
+
+
+    @commands.command(name="help", help="Return all the possible commands")
+    async def help(self,ctx):
+        help_message = """
+        ```
+        __p : Plays the song with search keyword following the command
+        __s : skips the currently playing music
+        __q : shows the music added in list/queue
+        __l : commands the bot to leave the voice channel
+        __help : shows all the commands of the bot.
+
+        Developer : Aman Prakash Jha
+        ```
+        """
+        await ctx.send(help_message)
+
+
+        
