@@ -95,9 +95,9 @@ class music(commands.Cog):
             else:
                 await self.vc.move_to(self.music_queue[0][1])
 
-            self.music_queue.pop(0)
-
             await ctx.send(f""":arrow_forward: Playing **{self.music_queue[0][0]['title']}** -- requested by {self.music_queue[0][2]}""")
+
+            self.music_queue.pop(0)
 
             self.vc.play(discord.FFmpegPCMAudio(
                 m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
