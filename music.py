@@ -144,7 +144,7 @@ class music(commands.Cog):
     @commands.command(name="l", help="Leaves if commanded to the voice channel")
     async def leave(self, ctx, *args):
         if self.vc.is_connected():
-            await ctx.send("""***Bye Bye :)***""")
+            await ctx.send("""**Bye Bye **:slight_smile:""")
             await self.vc.disconnect(force=True)
 
     @commands.command(name="help", help="Return all the possible commands")
