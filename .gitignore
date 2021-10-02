@@ -109,6 +109,10 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+vir/
+
+#file
+tokens.txt
 
 # Spyder project settings
 .spyderproject
