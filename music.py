@@ -143,6 +143,7 @@ class music(commands.Cog):
             await self.play_music(ctx)
 
     @commands.command(name="l", help="Leaves if commanded to the voice channel")
+    @commands.has_any_role('DJ','Moderator', 'GDSC Lead', 'Core Team')
     async def leave(self, ctx, *args):
         if self.vc.is_connected():
             await ctx.send("""**Bye Bye **:slight_smile:""")
