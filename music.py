@@ -84,7 +84,7 @@ class music(commands.Cog):
         else:
             self.is_playing = False
 
-    async def play_music(self):
+    async def play_music(self, ctx):
         if len(self.music_queue) > 0:
             self.is_playing = True
 
@@ -95,9 +95,9 @@ class music(commands.Cog):
             else:
                 await self.vc.move_to(self.music_queue[0][1])
 
-            print(self.music_queue)
-
             self.music_queue.pop(0)
+
+            await ctx.send(f""":arrow_forward: Playing **{self.music_queue[0][0]['title']}** -- requested by {self.music_queue[0][2]}""")
 
             self.vc.play(discord.FFmpegPCMAudio(
                 m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
@@ -116,19 +116,19 @@ class music(commands.Cog):
             if type(song) == type(True):
                 await ctx.send("Could not download the song. Incorrect format try another keyword.")
             else:
-                await ctx.send(f""":headphones: **{song["title"]}** added to the queue by {ctx.author.mention}""")
-                self.music_queue.append([song, voice_channel])
+                await ctx.send(f""":headphones: **{song["title"]}** has been added to the queue by {ctx.author.mention}""")
+                self.music_queue.append(
+                    [song, voice_channel, ctx.author.mention])
 
                 if self.is_playing == False:
-                    await self.play_music()
+                    await self.play_music(ctx)
 
     @commands.command(name="q", help="Displays the current songs in queue")
     async def q(self, ctx):
         retval = ""
         for i in range(0, len(self.music_queue)):
-            retval += self.music_queue[i][0]['title'] + "\n"
+            retval += f"""{i+1}. **{self.music_queue[i][0]['title']}** -- added by {self.music_queue[i][2]}\n"""
 
-        print(retval)
         if retval != "":
             await ctx.send(retval)
         else:
@@ -137,12 +137,14 @@ class music(commands.Cog):
     @commands.command(name="s", help="Skips the current song being played")
     async def skip(self, ctx):
         if self.vc != "" and self.vc:
+            await ctx.send("""***Skipped current song !***""")
             self.vc.stop()
-            await self.play_music()
+            await self.play_music(ctx)
 
     @commands.command(name="l", help="Leaves if commanded to the voice channel")
     async def leave(self, ctx, *args):
         if self.vc.is_connected():
+            await ctx.send("""***Bye Bye :)***""")
             await self.vc.disconnect(force=True)
 
     @commands.command(name="help", help="Return all the possible commands")
