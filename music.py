@@ -4,6 +4,7 @@ from discord.ext import commands
 
 from youtube_dl import YoutubeDL
 
+
 class music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -11,11 +12,11 @@ class music(commands.Cog):
         self.is_playing = False
 
         self.music_queue = []
-        self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'True'}
-        self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+        self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
+        self.FFMPEG_OPTIONS = {
+            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
         self.vc = ""
-
 
     # @commands.Cog.listener()
     # async def on_voice_state_update(self, ctx, *args):
@@ -40,9 +41,10 @@ class music(commands.Cog):
     #             break
     #         else:
     #             await self.vc.disconnect()
+
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
-        
+
         if not member.id == self.bot.user.id:
             return
 
@@ -59,12 +61,12 @@ class music(commands.Cog):
                 if not voice.is_connected():
                     break
 
-
     def search_yt(self, item):
         with YoutubeDL(self.YDL_OPTIONS) as ydl:
-            try: 
-                info = ydl.extract_info("ytsearch:%s" % item, download=False)['entries'][0]
-            except Exception: 
+            try:
+                info = ydl.extract_info("ytsearch:%s" %
+                                        item, download=False)['entries'][0]
+            except Exception:
                 return False
 
         return {'source': info['formats'][0]['url'], 'title': info['title']}
@@ -77,7 +79,8 @@ class music(commands.Cog):
 
             self.music_queue.pop(0)
 
-            self.vc.play(discord.FFmpegPCMAudio(m_url ,**self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
+            self.vc.play(discord.FFmpegPCMAudio(
+                m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
         else:
             self.is_playing = False
 
@@ -91,19 +94,20 @@ class music(commands.Cog):
                 self.vc = await self.music_queue[0][1].connect()
             else:
                 await self.vc.move_to(self.music_queue[0][1])
-            
+
             print(self.music_queue)
-            
+
             self.music_queue.pop(0)
 
-            self.vc.play(discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
+            self.vc.play(discord.FFmpegPCMAudio(
+                m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
         else:
             self.is_playing = False
 
     @commands.command(name="p", help="Plays a selected song from youtube")
     async def p(self, ctx, *args):
         query = " ".join(args)
-        
+
         voice_channel = ctx.author.voice.channel
         if voice_channel is None:
             await ctx.send("Connect to a voice channel!")
@@ -112,9 +116,9 @@ class music(commands.Cog):
             if type(song) == type(True):
                 await ctx.send("Could not download the song. Incorrect format try another keyword.")
             else:
-                await ctx.send("Song added to the queue")
+                await ctx.send(f""":headphones: **{song["title"]}** added to the queue by {ctx.author.mention}""")
                 self.music_queue.append([song, voice_channel])
-                
+
                 if self.is_playing == False:
                     await self.play_music()
 
@@ -136,27 +140,22 @@ class music(commands.Cog):
             self.vc.stop()
             await self.play_music()
 
-
     @commands.command(name="l", help="Leaves if commanded to the voice channel")
     async def leave(self, ctx, *args):
         if self.vc.is_connected():
             await self.vc.disconnect(force=True)
 
-
     @commands.command(name="help", help="Return all the possible commands")
-    async def help(self,ctx):
+    async def help(self, ctx):
         help_message = """
         ```
-        __p : Plays the song with search keyword following the command
-        __s : skips the currently playing music
-        __q : shows the music added in list/queue
-        __l : commands the bot to leave the voice channel
-        __help : shows all the commands of the bot.
+        _p : Plays the song with search keyword following the command
+        _s : skips the currently playing music
+        _q : shows the music added in list/queue
+        _l : commands the bot to leave the voice channel
+        _help : shows all the commands of the bot.
 
         Developer : Aman Prakash Jha
         ```
         """
         await ctx.send(help_message)
-
-
-        
