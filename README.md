@@ -36,6 +36,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#available-bot-commands">Bot Commands</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -94,6 +95,17 @@ To get a local copy up and running follow these simple steps.
    ```sh
    python app.py
    ```
+
+## Available Bot Commands
+```
+_p <song> : Plays the song with search keyword following the command
+_s : skips the currently playing music
+_q : shows the music added in list/queue
+_l : commands the bot to leave the voice channel
+_pn : Moves the song to the top of the queue
+_r <index>: removes song from queue at index given
+_help : shows all the commands of the bot.
+```
 
 <!-- ROADMAP -->
 
