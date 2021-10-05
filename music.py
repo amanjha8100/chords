@@ -149,14 +149,39 @@ class music(commands.Cog):
             await ctx.send("""**Bye Bye **:slight_smile:""")
             await self.vc.disconnect(force=True)
 
+    @commands.command(name="playnext", help="Skips the queue and plays the current song!")
+    @commands.has_any_role('DJ','Moderator', 'GDSC Lead', 'Core Team')
+    async def playnext(self, ctx, *args):
+        query = " ".join(args)
+
+        voice_channel = ctx.author.voice.channel
+        if voice_channel is None:
+            await ctx.send("Connect to a voice channel")
+        else:
+            song = self.search_yt(query)
+            if type(song) == type(True):
+                await ctx.send("Could not download the song. Incorrect format try another keyword.")
+            else:
+                await ctx.send(f""":headphones: **{song['title']}** has been added to the top of the queue by {ctx.author.mention}""")
+
+                self.music_queue.insert(
+                    0,
+                    [song, voice_channel,ctx.author.mention]
+                )
+                
+                print(self.music_queue[0][0]['title'])
+                if self.is_playing == False or (self.vc == "" or not self.vc.is_connected() or self.vc == None):
+                    await self.play_music(ctx)
+
     @commands.command(name="help", help="Return all the possible commands")
     async def help(self, ctx):
         help_message = """
         ```
         _p : Plays the song with search keyword following the command
-        _s : skips the currently playing music
-        _q : shows the music added in list/queue
-        _l : commands the bot to leave the voice channel
+        _s : Skips the currently playing music
+        _q : Shows the music added in list/queue
+        _l : Commands the bot to leave the voice channel
+        _playnext : Moves the song to the top of the queue
         _help : shows all the commands of the bot.
 
         Developer : Aman Prakash Jha
