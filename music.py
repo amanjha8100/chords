@@ -163,6 +163,20 @@ class music(commands.Cog):
         vc.pause()
         await ctx.send(f':pause_button:  {ctx.author.mention} Paused the song!')
 
+    """Resume the currently playing song."""
+    @commands.command(name="resume", help="Resume the currently playing song")
+    @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
+    async def resume(self, ctx):
+        vc = ctx.voice_client
+
+        if not vc or vc.is_playing():
+            return await ctx.send('I am already playing a song!', delete_after=20)
+        elif not vc.is_paused():
+            return
+
+        vc.resume()
+        await ctx.send(f':play_pause:  {ctx.author.mention} Resumed the song!')
+
     @commands.command(name="r", help="Removes the song indexed in the queue")
     @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def remove(self, ctx, *args):
@@ -188,11 +202,13 @@ class music(commands.Cog):
         help_message = """
         ```
         _p : Plays the song with search keyword following the command \U0001F3B5
-        _s : Skips the currently playing music \U0001F445
-        _q : Shows the music added in list/queue \U0001F440
-        _l : Commands the bot to leave the voice channel \U0001F634
         _pn : Moves the song to the top of the queue \U0001F4A5
+        _pause : Pause the currently playing song
+        _resume : Resume the currently playing song
+        _q : Shows the music added in list/queue \U0001F440
+        _s : Skips the currently playing music \U0001F445
         _r : removes song from queue at index given. \U0001F4A9
+        _l : Commands the bot to leave the voice channel \U0001F634
         _help : shows all the commands of the bot. \U0001F64F
 
         Developer : Aman Prakash Jha \U0001F525
