@@ -17,7 +17,7 @@ Login to your heroku account and follow the steps :-
    1. Go to **settings** --> **config vars** --> Under name add **token** --> paste your token there.
 5. Adding buildpacks to heroku,
    1. For this bot you will require three buildpacks.
-      1. Python Buildback (You will get this as an option while choosing buildpack)
+      1. Python Buildpack (You will get this as an option while choosing buildpack)
       2. [ffmpeg](https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest)
       3. [Opus](https://github.com/xrisk/heroku-opus)
 6. Now under the **deploy** section --> choose the repo branch (main in this case) --> click on **deploy branch**.
