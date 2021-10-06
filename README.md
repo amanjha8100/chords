@@ -16,6 +16,8 @@
     <a href="https://github.com/amanjha8100/chords/issues">Report Bug</a>
     ·
     <a href="https://github.com/amanjha8100/chords/issues">Request Feature</a>
+    .
+    <a href="https://github.com/amanjha8100/chords/blob/main/doc/deploy.md">Deploy Walkthrough</a>
   </h3>
 </p>
 
