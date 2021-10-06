@@ -67,7 +67,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-**You should have Pyhton and FFmpeg installed in your system**
+**You should have Python and FFmpeg installed in your system**
 
 - Download Python3 from [here](https://www.python.org/downloads/)
 - Download FFmpeg from [here](https://www.ffmpeg.org/)
