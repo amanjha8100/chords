@@ -11,10 +11,4 @@ bot.remove_command('help')
 bot.add_cog(music(bot))
 
 
-# token = ""
-# with open("tokens.txt") as file:
-#     token = file.read()
-
-# bot.run(token)
-
 bot.run(os.getenv('TOKEN'))

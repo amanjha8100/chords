@@ -19,7 +19,6 @@ class music(commands.Cog):
 
         self.vc = ""
 
-
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
 
@@ -42,7 +41,8 @@ class music(commands.Cog):
     def search_yt(self, item):
         with YoutubeDL(self.YDL_OPTIONS) as ydl:
             try:
-                info = ydl.extract_info("ytsearch:%s" %item, download=False)['entries'][0]
+                info = ydl.extract_info("ytsearch:%s" %
+                                        item, download=False)['entries'][0]
             except Exception:
                 return False
 
@@ -73,7 +73,6 @@ class music(commands.Cog):
                 await self.vc.move_to(self.music_queue[0][1])
 
             await ctx.send(f""":arrow_forward: Playing **{self.music_queue[0][0]['title']}** -- requested by {self.music_queue[0][2]}""")
-
 
             self.vc.play(discord.FFmpegPCMAudio(
                 m_url, **self.FFMPEG_OPTIONS), after=lambda e: self.play_next())
@@ -120,14 +119,14 @@ class music(commands.Cog):
             await self.play_music(ctx)
 
     @commands.command(name="l", help="Leaves if commanded to the voice channel")
-    @commands.has_any_role('DJ','Moderator', 'GDSC Lead', 'Core Team')
+    @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def leave(self, ctx, *args):
         if self.vc.is_connected():
             await ctx.send("""**Bye Bye **:slight_smile:""")
             await self.vc.disconnect(force=True)
 
     @commands.command(name="pn", help="Skips the queue and plays the current song!")
-    @commands.has_any_role('DJ','Moderator', 'GDSC Lead', 'Core Team')
+    @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def playnext(self, ctx, *args):
         query = " ".join(args)
 
@@ -143,28 +142,42 @@ class music(commands.Cog):
 
                 self.music_queue.insert(
                     0,
-                    [song, voice_channel,ctx.author.mention]
+                    [song, voice_channel, ctx.author.mention]
                 )
-                
+
                 print(self.music_queue[0][0]['title'])
                 if self.is_playing == False or (self.vc == "" or not self.vc.is_connected() or self.vc == None):
                     await self.play_music(ctx)
 
+    """Pause the currently playing song."""
+    @commands.command(name="pause", help="Pause the currently playing song")
+    @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
+    async def pause(self, ctx):
+        vc = ctx.voice_client
+
+        if not vc or not vc.is_playing():
+            return await ctx.send('I am currently playing nothing!', delete_after=20)
+        elif vc.is_paused():
+            return
+
+        vc.pause()
+        await ctx.send(f':pause_button:  {ctx.author.mention} Paused the song!')
+
     @commands.command(name="r", help="Removes the song indexed in the queue")
-    @commands.has_any_role('DJ','Moderator', 'GDSC Lead', 'Core Team')
+    @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def remove(self, ctx, *args):
         query = "".join(*args)
         index = 0
-        negative = True if (query[0]=='-') else False
+        negative = True if (query[0] == '-') else False
         if not negative:
             for i in range(len(query)):
                 convert = (int)(query[i])
                 index = index*10 + convert
         index -= 1
-        
+
         if negative:
             await ctx.send("Index cannot be less than one")
-        elif(index>=len(self.music_queue)):
+        elif(index >= len(self.music_queue)):
             await ctx.send("Wrong index. Indexed music not present in the queue")
         else:
             await ctx.send(f""":x: Music at index {query} removed by {ctx.author.mention}""")
