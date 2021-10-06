@@ -163,6 +163,20 @@ class music(commands.Cog):
         vc.pause()
         await ctx.send(f':pause_button:  {ctx.author.mention} Paused the song!')
 
+    """Resume the currently playing song."""
+    @commands.command(name="resume", help="Resume the currently playing song")
+    @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
+    async def resume(self, ctx):
+        vc = ctx.voice_client
+
+        if not vc or vc.is_playing():
+            return await ctx.send('I am already playing a song!', delete_after=20)
+        elif not vc.is_paused():
+            return
+
+        vc.resume()
+        await ctx.send(f':play_pause:  {ctx.author.mention} Resumed the song!')
+
     @commands.command(name="r", help="Removes the song indexed in the queue")
     @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def remove(self, ctx, *args):
