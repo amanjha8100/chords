@@ -99,6 +99,9 @@ To get a local copy up and running follow these simple steps.
    ```
 
 ## Available Bot Commands
+
+**You will currently need a discord role *DJ* to use all the available commands**
+
 ```
 _p <song> : Plays the song with search keyword following the command
 _s : skips the currently playing music
