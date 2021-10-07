@@ -30,12 +30,14 @@ If you follow the steps, you must have deployed the bot hopefully.
 ## Currently Available Commands
 
 ```
-_p : Plays the song with search keyword following the command
-_s : skips the currently playing music
-_q : shows the music added in list/queue
-_l : commands the bot to leave the voice channel
+_p : Plays the song with search keyword following the command 
 _pn : Moves the song to the top of the queue
-_r : removes song from queue at index given
+_pause : Pause the currently playing song
+_resume : Resume the currently playing song
+_q : Shows the music added in list/queue
+_s : Skips the currently playing music
+_r : removes song from queue at index given.
+_l : Commands the bot to leave the voice channel
 _help : shows all the commands of the bot.
 ```
 
