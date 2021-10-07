@@ -1,4 +1,4 @@
-from music import music
+from music import Music
 import os
 import discord
 from discord.ext import commands
@@ -6,9 +6,11 @@ from discord.ext import commands
 from dotenv import load_dotenv
 load_dotenv()
 
-bot = commands.Bot(command_prefix='_')
-bot.remove_command('help')
-bot.add_cog(music(bot))
+intents = discord.Intents.default()
+intents.members = True
 
+bot = commands.Bot(command_prefix='_', intents=intents)
+bot.remove_command('help')
+bot.add_cog(Music(bot))
 
 bot.run(os.getenv('TOKEN'))
