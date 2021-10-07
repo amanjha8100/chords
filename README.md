@@ -108,6 +108,7 @@ _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
 _q : Shows the music added in list/queue
+_cq : Clears the queue
 _s : Skips the currently playing music
 _r : removes song from queue at index given.
 _l : Commands the bot to leave the voice channel
