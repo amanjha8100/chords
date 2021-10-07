@@ -81,7 +81,7 @@ class music(commands.Cog):
         else:
             self.is_playing = False
 
-    @commands.command(name="p", help="Plays a selected song from youtube")
+    @commands.command(name="p", help="Plays a selected song from youtube", aliases=['play'])
     async def p(self, ctx, *args):
         query = " ".join(args)
 
@@ -100,7 +100,7 @@ class music(commands.Cog):
                 if self.is_playing == False:
                     await self.play_music(ctx)
 
-    @commands.command(name="q", help="Displays the current songs in queue")
+    @commands.command(name="q", help="Displays the current songs in queue", aliases=['queue'])
     async def q(self, ctx):
         retval = ""
         for i in range(0, len(self.music_queue)):
@@ -111,14 +111,14 @@ class music(commands.Cog):
         else:
             await ctx.send("No music in queue")
 
-    @commands.command(name="s", help="Skips the current song being played")
+    @commands.command(name="s", help="Skips the current song being played", aliases=['skip'])
     async def skip(self, ctx):
         if self.vc != "" and self.vc:
             await ctx.send("""***Skipped current song !***""")
             self.vc.stop()
             await self.play_music(ctx)
 
-    @commands.command(name="l", help="Leaves if commanded to the voice channel")
+    @commands.command(name="l", help="Leaves if commanded to the voice channel", aliases=['leave'])
     @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def leave(self, ctx, *args):
         if self.vc.is_connected():
@@ -177,7 +177,7 @@ class music(commands.Cog):
         vc.resume()
         await ctx.send(f':play_pause:  {ctx.author.mention} Resumed the song!')
 
-    @commands.command(name="r", help="Removes the song indexed in the queue")
+    @commands.command(name="r", help="Removes the song indexed in the queue", aliases=['remove'])
     @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def remove(self, ctx, *args):
         query = "".join(*args)
@@ -197,7 +197,7 @@ class music(commands.Cog):
             await ctx.send(f""":x: Music at index {query} removed by {ctx.author.mention}""")
             self.music_queue.pop(index)
 
-    @commands.command(name="help", help="Return all the possible commands")
+    @commands.command(name="help", help="Return all the possible commands", aliases=['h'])
     async def help(self, ctx):
         help_message = """
         ```
