@@ -105,6 +105,7 @@ To get a local copy up and running follow these simple steps.
 ```
 _p <song> : Plays the song with search keyword following the command
 _pause : Pause the currently playing song
+_resume : Resumes the currently paused song
 _s : skips the currently playing music
 _q : shows the music added in list/queue
 _l : commands the bot to leave the voice channel
