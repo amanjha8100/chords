@@ -118,7 +118,6 @@ class Music(commands.Cog):
         self.music_queue = []
         await ctx.send("""***Queue cleared !***""")
 
-    @commands.command(name="s", help="Skips the current song being played")
     @commands.command(name="s", help="Skips the current song being played", aliases=['skip'])
     async def skip(self, ctx):
         if self.vc != "" and self.vc:
