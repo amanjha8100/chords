@@ -6,13 +6,14 @@ from discord.ext.commands.core import command
 from youtube_dl import YoutubeDL
 
 
-class music(commands.Cog):
+class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
         self.is_playing = False
-
         self.music_queue = []
+        self.skip_votes = set()
+
         self.YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
         self.FFMPEG_OPTIONS = {
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
@@ -115,9 +116,21 @@ class music(commands.Cog):
     async def skip(self, ctx):
         if self.vc != "" and self.vc:
             await ctx.send("""***Skipped current song !***""")
+            self.skip_votes = set()
             self.vc.stop()
             await self.play_music(ctx)
 
+    @commands.command(name="voteskip", help="Vote to skip the current song being played")
+    async def voteskip(self, ctx):
+        if ctx.voice_client is None: return
+
+        num_members = len(ctx.voice_client.channel.members) - 1
+        self.skip_votes.add(ctx.author.id)
+        votes = len(self.skip_votes)
+        if votes >= num_members / 2:
+            await ctx.send(f"Vote passed by majority ({votes}/{num_members}).")
+            await self.skip(ctx)
+        
     @commands.command(name="l", help="Leaves if commanded to the voice channel")
     @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def leave(self, ctx, *args):
