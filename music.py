@@ -218,9 +218,11 @@ class Music(commands.Cog):
         _pause : Pause the currently playing song
         _resume : Resume the currently playing song
         _q : Shows the music added in list/queue \U0001F440
+        _cq : Clears the entire queue of songs.
         _s : Skips the currently playing music \U0001F445
         _r : removes song from queue at index given. \U0001F4A9
         _l : Commands the bot to leave the voice channel \U0001F634
+        _voteskip : Initiates voting from the voice members to skip a song.
         _help : shows all the commands of the bot. \U0001F64F
 
         Developer : Aman Prakash Jha \U0001F525
