@@ -82,7 +82,7 @@ class Music(commands.Cog):
         else:
             self.is_playing = False
 
-    @commands.command(name="p", help="Plays a selected song from youtube")
+    @commands.command(name="p", help="Plays a selected song from youtube", aliases=['play'])
     async def p(self, ctx, *args):
         query = " ".join(args)
 
@@ -101,7 +101,7 @@ class Music(commands.Cog):
                 if self.is_playing == False:
                     await self.play_music(ctx)
 
-    @commands.command(name="q", help="Displays the current songs in queue")
+    @commands.command(name="q", help="Displays the current songs in queue", aliases=['queue'])
     async def q(self, ctx):
         retval = ""
         for i in range(0, len(self.music_queue)):
@@ -112,18 +112,21 @@ class Music(commands.Cog):
         else:
             await ctx.send("No music in queue")
 
+
     @commands.command(name="cq", help="Clears the queue")
     async def cq(self, ctx):
         self.music_queue = []
         await ctx.send("""***Queue cleared !***""")
 
     @commands.command(name="s", help="Skips the current song being played")
+    @commands.command(name="s", help="Skips the current song being played", aliases=['skip'])
     async def skip(self, ctx):
         if self.vc != "" and self.vc:
             await ctx.send("""***Skipped current song !***""")
             self.skip_votes = set()
             self.vc.stop()
             await self.play_music(ctx)
+
 
     @commands.command(name="voteskip", help="Vote to skip the current song being played")
     async def voteskip(self, ctx):
@@ -135,7 +138,9 @@ class Music(commands.Cog):
             await ctx.send(f"Vote passed by majority ({votes}/{num_members}).")
             await self.skip(ctx)
         
-    @commands.command(name="l", help="Leaves if commanded to the voice channel")
+   
+
+    @commands.command(name="l", help="Leaves if commanded to the voice channel", aliases=['leave'])
     @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def leave(self, ctx, *args):
         if self.vc.is_connected():
@@ -194,7 +199,7 @@ class Music(commands.Cog):
         vc.resume()
         await ctx.send(f':play_pause:  {ctx.author.mention} Resumed the song!')
 
-    @commands.command(name="r", help="Removes the song indexed in the queue")
+    @commands.command(name="r", help="Removes the song indexed in the queue", aliases=['remove'])
     @commands.has_any_role('DJ', 'Moderator', 'GDSC Lead', 'Core Team')
     async def remove(self, ctx, *args):
         query = "".join(*args)
@@ -214,21 +219,21 @@ class Music(commands.Cog):
             await ctx.send(f""":x: Music at index {query} removed by {ctx.author.mention}""")
             self.music_queue.pop(index)
 
-    @commands.command(name="help", help="Return all the possible commands")
+    @commands.command(name="help", help="Return all the possible commands", aliases=['h'])
     async def help(self, ctx):
         help_message = """
         ```
-        _p : Plays the song with search keyword following the command \U0001F3B5
+        _p, _play : Plays the song with search keyword following the command \U0001F3B5
         _pn : Moves the song to the top of the queue \U0001F4A5
         _pause : Pause the currently playing song
         _resume : Resume the currently playing song
-        _q : Shows the music added in list/queue \U0001F440
+        _q, _queue : Shows the music added in list/queue \U0001F440
         _cq : Clears the entire queue of songs.
-        _s : Skips the currently playing music \U0001F445
-        _r : removes song from queue at index given. \U0001F4A9
-        _l : Commands the bot to leave the voice channel \U0001F634
+        _s, _skip : Skips the currently playing music \U0001F445
+        _r, _remove : removes song from queue at index given. \U0001F4A9
         _voteskip : Initiates voting from the voice members to skip a song.
-        _help : shows all the commands of the bot. \U0001F64F
+        _l, _leave : Commands the bot to leave the voice channel \U0001F634
+        _h, _help : shows all the commands of the bot. \U0001F64F
 
         Developer : Aman Prakash Jha \U0001F525
         ```

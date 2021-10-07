@@ -103,17 +103,16 @@ To get a local copy up and running follow these simple steps.
 **You will currently need a discord role *DJ* to use all the available commands**
 
 ```
-_p : Plays the song with search keyword following the command 
+_p, _play : Plays the song with search keyword following the command 
 _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
-_q : Shows the music added in list/queue
-_cq : Clears the queue
-_s : Skips the currently playing music
-_voteskip : Votes to skip the currently playing music (majority based vote)
-_r : removes song from queue at index given.
-_l : Commands the bot to leave the voice channel
-_help : shows all the commands of the bot.
+_q, _queue : Shows the music added in list/queue
+_s, _skip : Skips the currently playing music
+_r, _remove : removes song from queue at index given.
+_l, _leave : Commands the bot to leave the voice channel
+_h, _help : shows all the commands of the bot.
+
 ```
 
 <!-- ROADMAP -->
