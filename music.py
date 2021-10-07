@@ -123,7 +123,6 @@ class Music(commands.Cog):
     @commands.command(name="voteskip", help="Vote to skip the current song being played")
     async def voteskip(self, ctx):
         if ctx.voice_client is None: return
-
         num_members = len(ctx.voice_client.channel.members) - 1
         self.skip_votes.add(ctx.author.id)
         votes = len(self.skip_votes)
