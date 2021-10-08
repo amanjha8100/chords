@@ -121,7 +121,7 @@ class Music(commands.Cog):
         await ctx.send("""***Queue cleared !***""")
 
     @commands.command(name="shuffle", help="Shuffles the queue")
-    async def cq(self, ctx):
+    async def shuffle(self, ctx):
         shuffle(self.music_queue)
         await ctx.send("""***Queue shuffled !***""")
 
