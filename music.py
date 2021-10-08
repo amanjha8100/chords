@@ -238,3 +238,9 @@ class Music(commands.Cog):
         ```
         """
         await ctx.send(help_message)
+
+    @commands.command(name="prefix", help="Changes the prefix")
+    async def prefix(self, ctx, *args):
+        with open('prefix.txt', 'w') as fp:
+            fp.write(' '.join(*args))
+        await ctx.send("""***Changed prefix, restart bot to take effect !***""")
