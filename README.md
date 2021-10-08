@@ -47,7 +47,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+![image](https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-annoy.svg.png)## About The Project
 
 Most of the Discord Music Bots are down. They got banned, unfortunately.\
 So we thought of making our own Discord Music Bot for our Discord Community.
@@ -100,10 +100,10 @@ To get a local copy up and running follow these simple steps.
 
 ## Available Bot Commands
 
-**You will currently need a discord role *DJ* to use all the available commands**
+**You will currently need a discord role _DJ_ to use all the available commands**
 
 ```
-_p, _play : Plays the song with search keyword following the command 
+_p, _play : Plays the song with search keyword following the command
 _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
