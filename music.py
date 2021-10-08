@@ -134,7 +134,7 @@ class Music(commands.Cog):
             await self.play_music(ctx)
 
 
-    @commands.command(name="voteskip", help="Vote to skip the current song being played", aliases=[''])
+    @commands.command(name="voteskip", help="Vote to skip the current song being played", aliases=['vs'])
     async def voteskip(self, ctx):
         if ctx.voice_client is None: return
         num_members = len(ctx.voice_client.channel.members) - 1
