@@ -113,10 +113,15 @@ class Music(commands.Cog):
             await ctx.send("No music in queue")
 
 
-    @commands.command(name="cq", help="Clears the queue")
+    @commands.command(name="cq", help="Clears the queue", aliases=['clear'])
     async def cq(self, ctx):
         self.music_queue = []
         await ctx.send("""***Queue cleared !***""")
+
+    @commands.command(name="shuffle", help="Shuffles the queue")
+    async def cq(self, ctx):
+        shuffle(self.music_queue)
+        await ctx.send("""***Queue shuffled !***""")
 
     @commands.command(name="s", help="Skips the current song being played", aliases=['skip'])
     async def skip(self, ctx):
@@ -127,7 +132,7 @@ class Music(commands.Cog):
             await self.play_music(ctx)
 
 
-    @commands.command(name="voteskip", help="Vote to skip the current song being played")
+    @commands.command(name="voteskip", help="Vote to skip the current song being played", aliases=[''])
     async def voteskip(self, ctx):
         if ctx.voice_client is None: return
         num_members = len(ctx.voice_client.channel.members) - 1
@@ -227,10 +232,11 @@ class Music(commands.Cog):
         _pause : Pause the currently playing song
         _resume : Resume the currently playing song
         _q, _queue : Shows the music added in list/queue \U0001F440
-        _cq : Clears the entire queue of songs.
+        _cq _clear: Clears the entire queue of songs.
+        _shuffle: Shuffles the entire queue of songs.
         _s, _skip : Skips the currently playing music \U0001F445
         _r, _remove : removes song from queue at index given. \U0001F4A9
-        _voteskip : Initiates voting from the voice members to skip a song.
+        _vs, _voteskip : Initiates voting from the voice members to skip a song.
         _l, _leave : Commands the bot to leave the voice channel \U0001F634
         _h, _help : shows all the commands of the bot. \U0001F64F
 
