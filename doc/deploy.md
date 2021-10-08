@@ -40,6 +40,7 @@ _shuffle : Shuffles the entire queue of songs
 _s, _skip : Skips the currently playing music
 _r, _remove : removes song from queue at index given.
 _l, _leave : Commands the bot to leave the voice channel
+ _voteskip : Initiates voting from the voice members to skip a song.
 _h, _help : shows all the commands of the bot.
 _prefix : Change prefix of the bot. (Restart Required)
 ```
