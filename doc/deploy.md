@@ -39,6 +39,7 @@ _s, _skip : Skips the currently playing music
 _r, _remove : removes song from queue at index given.
 _l, _leave : Commands the bot to leave the voice channel
 _h, _help : shows all the commands of the bot.
+_prefix : Change prefix of the bot. (Restart Required)
 ```
 
 Working on more **new features** such as **resume**, **clearqueue** as I build more.

@@ -218,6 +218,12 @@ class Music(commands.Cog):
             await ctx.send(f""":x: Music at index {query} removed by {ctx.author.mention}""")
             self.music_queue.pop(index)
 
+    @commands.command(name="prefix", help="Changes the prefix")
+    async def prefix(self, ctx, *args):
+        with open('prefix.txt', 'w') as fp:
+            fp.write(' '.join(*args))
+        await ctx.send("""***Changed prefix, restart bot to take effect !***""")
+
     @commands.command(name="help", help="Return all the possible commands", aliases=['h'])
     async def help(self, ctx):
         help_message = """
@@ -233,14 +239,11 @@ class Music(commands.Cog):
         _voteskip : Initiates voting from the voice members to skip a song.
         _l, _leave : Commands the bot to leave the voice channel \U0001F634
         _h, _help : shows all the commands of the bot. \U0001F64F
+        _prefix : Change prefix of the bot. (Restart Required)
 
         Developer : Aman Prakash Jha \U0001F525
         ```
         """
         await ctx.send(help_message)
 
-    @commands.command(name="prefix", help="Changes the prefix")
-    async def prefix(self, ctx, *args):
-        with open('prefix.txt', 'w') as fp:
-            fp.write(' '.join(*args))
-        await ctx.send("""***Changed prefix, restart bot to take effect !***""")
+    
