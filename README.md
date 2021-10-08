@@ -47,7 +47,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-![## About The Project ](https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-annoy.svg.png)
+## About The Project ![image ](https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-annoy.svg.png = 50x50)
 
 Most of the Discord Music Bots are down. They got banned, unfortunately.\
 So we thought of making our own Discord Music Bot for our Discord Community.
