@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.core import command
 
+from random import shuffle
+
 from youtube_dl import YoutubeDL
 
 
@@ -132,13 +134,18 @@ class Music(commands.Cog):
         else:
             await ctx.send("No music in queue")
 
-    @commands.command(name="cq", help="Clears the entire queue of songs.")
+    @commands.command(name="cq", help="Clears the queue", aliases=["clear"])
     async def cq(self, ctx):
         self.music_queue = []
         await ctx.send("""***Queue cleared !***""")
 
+    @commands.command(name="shuffle", help="Shuffles the queue")
+    async def shuffle(self, ctx):
+        shuffle(self.music_queue)
+        await ctx.send("""***Queue shuffled !***""")
+
     @commands.command(
-        name="s", help="Skips the currently playing music \U0001F445", aliases=["skip"]
+        name="s", help="Skips the current song being played", aliases=["skip"]
     )
     async def skip(self, ctx):
         if self.vc != "" and self.vc:
@@ -148,7 +155,9 @@ class Music(commands.Cog):
             await self.play_music(ctx)
 
     @commands.command(
-        name="voteskip", help="Initiates voting from the voice members to skip a song."
+        name="voteskip",
+        help="Vote to skip the current song being played",
+        aliases=["vs"],
     )
     async def voteskip(self, ctx):
         if ctx.voice_client is None:
