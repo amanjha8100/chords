@@ -3,6 +3,8 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.core import command
 
+from random import shuffle
+
 from youtube_dl import YoutubeDL
 
 
