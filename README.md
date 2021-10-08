@@ -46,7 +46,8 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
-<img align="left" width="80" height="80" src="https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-annoy.svg.png" alt="music icon">
+
+<div style="float: left;"><img src="https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-annoy.svg.png" width="30" height="30"/></div> 
 ## About The Project
 
 Most of the Discord Music Bots are down. They got banned, unfortunately.\
