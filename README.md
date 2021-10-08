@@ -103,7 +103,7 @@ To get a local copy up and running follow these simple steps.
 **You will currently need a discord role *DJ* to use all the available commands**
 
 ```
-_p, _play : Plays the song with search keyword following the command 
+_p : Plays the song with search keyword following the command 
 _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
