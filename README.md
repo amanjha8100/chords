@@ -63,6 +63,8 @@ So we thought of making our own Discord Music Bot for our Discord Community.
 
 <!-- GETTING STARTED -->
 
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-drop.svg.png" width="50px" />
+
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
@@ -100,6 +102,8 @@ To get a local copy up and running follow these simple steps.
    python app.py
    ```
 
+   <img align="left" src="https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-shred.svg.png" width="50px" />
+
 ## Available Bot Commands
 
 **You will currently need a discord role _DJ_ to use all the available commands**
@@ -119,11 +123,14 @@ _h, _help : shows all the commands of the bot.
 
 <!-- ROADMAP -->
 
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-sound.svg.png" width="50px" />
+
 ## Roadmap
 
 See the [open issues](https://github.com/amanjha8100/chords/issues) for a list of proposed features (and known issues). Feel free to raise new issues.
 
 <!-- CONTRIBUTING -->
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-steal.svg.png" width="50px" />
 
 ## Contributing
 
@@ -137,6 +144,7 @@ Contributions are what make the open source community such an amazing place to l
 6. Open a Pull Request
 
 <!-- LICENSE -->
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/main/icon/Toicon-icon-fandom-submerge.svg.png" width="50px" />
 
 ## License
 
