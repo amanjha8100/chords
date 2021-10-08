@@ -96,7 +96,7 @@ class Music(commands.Cog):
     @commands.command(
         name="p",
         help="Plays a selected song from youtube \U0001F3B5",
-        aliases=["play", "tst"],
+        aliases=["play"],
     )
     async def p(self, ctx, *args):
         query = " ".join(args)
