@@ -9,7 +9,7 @@ class Help(commands.Cog):
         self.bot = bot
         self.bot_cogs = self.bot.cogs
 
-    @commands.command(hidden=True, name="help", aliases=["h"])
+    @commands.command(name="help", aliases=["h"])
     async def _help(self, ctx, cog_query: str = "Music"):
         """Returns all not hidden commands from a cog.
         Default query is set to 'Music' but other cogs are supported too"""
