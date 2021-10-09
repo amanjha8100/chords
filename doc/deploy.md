@@ -30,15 +30,18 @@ If you follow the steps, you must have deployed the bot hopefully.
 ## Currently Available Commands
 
 ```
-_p : Plays the song with search keyword following the command 
+_p, _play : Plays the song with search keyword following the command 
 _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
-_q : Shows the music added in list/queue
-_s : Skips the currently playing music
-_r : removes song from queue at index given.
-_l : Commands the bot to leave the voice channel
-_help : shows all the commands of the bot.
+_q, _queue : Shows the music added in list/queue
+_cq _clear : Clears the entire queue of songs
+_shuffle : Shuffles the entire queue of songs
+_s, _skip : Skips the currently playing music
+_r, _remove : removes song from queue at index given.
+_l, _leave : Commands the bot to leave the voice channel
+ _voteskip : Initiates voting from the voice members to skip a song.
+_h, _help : shows all the commands of the bot.
 ```
 
 Working on more **new features** such as **resume**, **clearqueue** as I build more.
