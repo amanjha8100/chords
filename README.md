@@ -77,8 +77,6 @@ To get a local copy up and running follow these simple steps.
 
 ### Installation
 
-<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/1.jpg" width="50px" height="50px" />
-
 1. Fork the project first
 
 2. Clone the forked repo
