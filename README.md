@@ -39,7 +39,7 @@
       </ul>
     </li>
     <li><a href="#available-bot-commands">Bot Commands</a></li>
-    <li><a href="#configuration-discord-developer-portal">Configuration - Discord Developer Portal</a></li>
+    <li><a href="#configuration---discord-developer-portal">Configuration - Discord Developer Portal</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
