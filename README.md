@@ -54,6 +54,8 @@
 Most of the Discord Music Bots are down. They got banned, unfortunately.\
 So we thought of making our own Discord Music Bot for our Discord Community.
 
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/note.png" width="30px" height="30px" />
+
 ### Built With
 
 - [Python](https://www.python.org/)
@@ -68,12 +70,16 @@ So we thought of making our own Discord Music Bot for our Discord Community.
 
 To get a local copy up and running follow these simple steps.
 
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/note.png" width="30px" height="30px" />
+
 ### Prerequisites
 
 **You should have Python and FFmpeg installed in your system**
 
 - Download Python3 from [here](https://www.python.org/downloads/)
 - Download FFmpeg from [here](https://www.ffmpeg.org/)
+
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/note.png" width="30px" height="30px" />
 
 ### Installation
 
