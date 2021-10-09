@@ -4,8 +4,9 @@ from discord.ext import commands
 from discord.ext.commands.core import command
 
 from random import shuffle
-
 from youtube_dl import YoutubeDL
+
+from roles import voice_channel_moderator_roles
 
 
 class Music(commands.Cog):
@@ -114,7 +115,8 @@ class Music(commands.Cog):
                 await ctx.send(
                     f""":headphones: **{song["title"]}** has been added to the queue by {ctx.author.mention}"""
                 )
-                self.music_queue.append([song, voice_channel, ctx.author.mention])
+                self.music_queue.append(
+                    [song, voice_channel, ctx.author.mention])
 
                 if self.is_playing == False:
                     await self.play_music(ctx)
@@ -174,7 +176,7 @@ class Music(commands.Cog):
         help="Commands the bot to leave the voice channel \U0001F634",
         aliases=["leave"],
     )
-    @commands.has_any_role("DJ", "Moderator", "GDSC Lead", "Core Team")
+    @commands.has_any_role(*voice_channel_moderator_roles)
     async def leave(self, ctx, *args):
         if self.vc.is_connected():
             await ctx.send("""**Bye Bye **:slight_smile:""")
@@ -183,7 +185,7 @@ class Music(commands.Cog):
     @commands.command(
         name="pn", help="Moves the song to the top of the queue \U0001F4A5"
     )
-    @commands.has_any_role("DJ", "Moderator", "GDSC Lead", "Core Team")
+    @commands.has_any_role(*voice_channel_moderator_roles)
     async def playnext(self, ctx, *args):
         query = " ".join(args)
 
@@ -201,7 +203,8 @@ class Music(commands.Cog):
                     f""":headphones: **{song['title']}** has been added to the top of the queue by {ctx.author.mention}"""
                 )
 
-                self.music_queue.insert(0, [song, voice_channel, ctx.author.mention])
+                self.music_queue.insert(
+                    0, [song, voice_channel, ctx.author.mention])
 
                 print(self.music_queue[0][0]["title"])
                 if self.is_playing == False or (
@@ -212,7 +215,7 @@ class Music(commands.Cog):
     """Pause the currently playing song."""
 
     @commands.command(name="pause", help="Pause the currently playing song")
-    @commands.has_any_role("DJ", "Moderator", "GDSC Lead", "Core Team")
+    @commands.has_any_role(*voice_channel_moderator_roles)
     async def pause(self, ctx):
         vc = ctx.voice_client
 
@@ -227,7 +230,7 @@ class Music(commands.Cog):
     """Resume the currently playing song."""
 
     @commands.command(name="resume", help="Resume the currently playing song")
-    @commands.has_any_role("DJ", "Moderator", "GDSC Lead", "Core Team")
+    @commands.has_any_role(*voice_channel_moderator_roles)
     async def resume(self, ctx):
         vc = ctx.voice_client
 
@@ -244,7 +247,7 @@ class Music(commands.Cog):
         help="removes song from queue at index given. \U0001F4A9",
         aliases=["remove"],
     )
-    @commands.has_any_role("DJ", "Moderator", "GDSC Lead", "Core Team")
+    @commands.has_any_role(*voice_channel_moderator_roles)
     async def remove(self, ctx, *args):
         query = "".join(*args)
         index = 0
