@@ -39,6 +39,7 @@
       </ul>
     </li>
     <li><a href="#available-bot-commands">Bot Commands</a></li>
+    <li><a href="#configuration---discord-developer-portal">Configuration - Discord Developer Portal</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -98,23 +99,31 @@ To get a local copy up and running follow these simple steps.
    python app.py
    ```
 
+<!-- CONFIGURATION - DISCORD DEVELOPER PORTAL -->
+
+## Configuration - Discord Developer Portal
+
+Go to the [Discord Developer Portal](https://discord.com/developers/docs/intro) to create your application and bot. You must give the following permissions:
+
+- Server Members Intent ✔️
+- Text Permissions:
+  - Send Messages ✔️
+  - Read Message History ✔️
+
 ## Available Bot Commands
 
 **You will currently need a discord role *DJ* to use all the available commands**
 
 ```
-_p : Plays the song with search keyword following the command 
+ _p : Plays the song with search keyword following the command 
 _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
-_q, _queue : Shows the music added in list/queue
-_cq _clear : Clears the entire queue of songs
-_shuffle : Shuffles the entire queue of songs
-_s, _skip : Skips the currently playing music
-_r, _remove : removes song from queue at index given
-_l, _leave : Commands the bot to leave the voice channel
-_h, _help : shows all the commands of the bot.
-
+_q : Shows the music added in list/queue
+_s : Skips the currently playing music
+_r : removes song from queue at index given.
+_l : Commands the bot to leave the voice channel
+_help : shows all the commands of the bot.
 ```
 
 <!-- ROADMAP -->
