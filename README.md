@@ -63,6 +63,7 @@ So we thought of making our own Discord Music Bot for our Discord Community.
 
 <!-- GETTING STARTED -->
 <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-charm.svg.png" width="50px" height="50px" />
+
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
@@ -75,6 +76,8 @@ To get a local copy up and running follow these simple steps.
 - Download FFmpeg from [here](https://www.ffmpeg.org/)
 
 ### Installation
+
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/1.jpg" width="50px" height="50px" />
 
 1. Fork the project first
 
@@ -102,6 +105,7 @@ To get a local copy up and running follow these simple steps.
 
 <!-- CONFIGURATION - DISCORD DEVELOPER PORTAL -->
 <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-steal.svg.png" width="50px" height="50px" />
+
 ## Configuration - Discord Developer Portal
 
 Go to the [Discord Developer Portal](https://discord.com/developers/docs/intro) to create your application and bot. You must give the following permissions:
@@ -131,12 +135,14 @@ _help : shows all the commands of the bot.
 
 <!-- ROADMAP -->
  <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-drop.svg.png" width="50px" height="50px"  />
+
 ## Roadmap
 
 See the [open issues](https://github.com/amanjha8100/chords/issues) for a list of proposed features (and known issues). Feel free to raise new issues.
 
 <!-- CONTRIBUTING -->
  <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-shred.svg.png" width="50px" height="50px" />
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -150,6 +156,7 @@ Contributions are what make the open source community such an amazing place to l
 
 <!-- LICENSE -->
  <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-sound.svg.png" width="50px" height="50px" />
+
 ## License
 
 Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information.
