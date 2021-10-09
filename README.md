@@ -39,6 +39,7 @@
       </ul>
     </li>
     <li><a href="#available-bot-commands">Bot Commands</a></li>
+    <li><a href="#configuration-discord-developer-portal">Configuration - Discord Developer Portal</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -97,6 +98,17 @@ To get a local copy up and running follow these simple steps.
    ```sh
    python app.py
    ```
+
+<!-- CONFIGURATION - DISCORD DEVELOPER PORTAL -->
+
+## Configuration - Discord Developer Portal
+
+Go to the [Discord Developer Portal](https://discord.com/developers/docs/intro) to create your application and bot. You must give the following permissions:
+
+- Server Members Intent ✔️
+- Text Permissions:
+  - Send Messages ✔️
+  - Read Message History ✔️
 
 ## Available Bot Commands
 
