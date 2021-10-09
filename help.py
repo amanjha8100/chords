@@ -16,7 +16,7 @@ class Help(commands.Cog):
 
         try:
             cog = self.bot_cogs[cog_query]
-        except KeyError as e:
+        except KeyError:
             query_error_embed = discord.Embed(
                 title="Query Error. Perhaps you mean:",
                 description=f"{', '.join(self.bot_cogs.keys())}.",
@@ -32,17 +32,19 @@ class Help(commands.Cog):
         for command in cog.get_commands():
 
             command_aliases = (
-                f"{', '.join(command.aliases)}" if len(command.aliases) > 0 else "None"
+                f"{', '.join(command.aliases)}" if len(
+                    command.aliases) > 0 else "None"
             )
             cog_help_embed.add_field(
-                name=(f"_{command.name} , {command_aliases}") if (command_aliases != "None") else (f"_{command.name}"),
+                name=(f"_{command.name} , {command_aliases}") if (
+                    command_aliases != "None") else (f"_{command.name}"),
                 value=f"`{command.help}`",
                 inline=False,
             )
 
         cog_help_embed.add_field(
             name="Developer:",
-            value="Aman Prakash Jha \U0001F525" ,
-            inline = False
+            value="Aman Prakash Jha \U0001F525",
+            inline=False
         )
         await ctx.send(embed=cog_help_embed)
