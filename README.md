@@ -47,11 +47,14 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-annoy.svg.png" width="50px" height="50px" />
 
 ## About The Project
 
 Most of the Discord Music Bots are down. They got banned, unfortunately.\
 So we thought of making our own Discord Music Bot for our Discord Community.
+
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/note.png" width="30px" height="30px" />
 
 ### Built With
 
@@ -61,10 +64,13 @@ So we thought of making our own Discord Music Bot for our Discord Community.
 - [youtube_dl](https://pypi.org/project/youtube_dl/)
 
 <!-- GETTING STARTED -->
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-charm.svg.png" width="50px" height="50px" />
 
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
+
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/note.png" width="30px" height="30px" />
 
 ### Prerequisites
 
@@ -72,6 +78,8 @@ To get a local copy up and running follow these simple steps.
 
 - Download Python3 from [here](https://www.python.org/downloads/)
 - Download FFmpeg from [here](https://www.ffmpeg.org/)
+
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/note.png" width="30px" height="30px" />
 
 ### Installation
 
@@ -100,6 +108,7 @@ To get a local copy up and running follow these simple steps.
    ```
 
 <!-- CONFIGURATION - DISCORD DEVELOPER PORTAL -->
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-steal.svg.png" width="50px" height="50px" />
 
 ## Configuration - Discord Developer Portal
 
@@ -110,12 +119,14 @@ Go to the [Discord Developer Portal](https://discord.com/developers/docs/intro) 
   - Send Messages ✔️
   - Read Message History ✔️
 
+<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-rap.svg.png" width="50px" height="50px" />
+
 ## Available Bot Commands
 
-**You will currently need a discord role *DJ* to use all the available commands**
+**You will currently need a discord role _DJ_ to use all the available commands**
 
 ```
- _p : Plays the song with search keyword following the command 
+ _p : Plays the song with search keyword following the command
 _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
@@ -127,12 +138,14 @@ _help : shows all the commands of the bot.
 ```
 
 <!-- ROADMAP -->
+ <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-drop.svg.png" width="50px" height="50px"  />
 
 ## Roadmap
 
 See the [open issues](https://github.com/amanjha8100/chords/issues) for a list of proposed features (and known issues). Feel free to raise new issues.
 
 <!-- CONTRIBUTING -->
+ <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-shred.svg.png" width="50px" height="50px" />
 
 ## Contributing
 
@@ -146,6 +159,7 @@ Contributions are what make the open source community such an amazing place to l
 6. Open a Pull Request
 
 <!-- LICENSE -->
+ <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-sound.svg.png" width="50px" height="50px" />
 
 ## License
 
