@@ -205,7 +205,7 @@ class Music(commands.Cog):
                     "If more than 50% of the people in your channel agree, the request will be up next!"
                 )
                 await vote_message.add_reaction("\U0001F44D")
-                await asyncio.sleep(3)
+                await asyncio.sleep(30)
                 voters = len(voice_channel.members)
                 voters = voters - 1 if self.vc else voters
                 result_vote_msg = await ctx.fetch_message(vote_message.id)
