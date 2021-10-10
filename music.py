@@ -199,14 +199,33 @@ class Music(commands.Cog):
                     "Could not download the song. Incorrect format try another keyword."
                 )
             else:
-                await ctx.send(
-                    f""":headphones: **{song['title']}** has been added to the top of the queue by {ctx.author.mention}"""
+                vote_message = await ctx.send(
+                    f":headphones: **{song['title']}** will be added to the top of the queue by {ctx.author.mention}\n"
+                    "You have 30 seconds to vote by reacting :+1: on this message.\n"
+                    "If more than 50% of the people in your channel agree, the request will be up next!"
                 )
+                await vote_message.add_reaction("\U0001F44D")
+                await asyncio.sleep(3)
+                voters = len(voice_channel.members)
+                voters = voters - 1 if self.vc else voters
+                result_vote_msg = await ctx.fetch_message(vote_message.id)
+                votes = next(react for react in result_vote_msg.reactions if str(react.emoji) == "\U0001F44D").count - 1
+                if votes >= voters / 2:
+                    self.music_queue.insert(
+                        0,
+                        [song, voice_channel,ctx.author.mention]
+                    )
+                    await ctx.send(
+                        f":headphones: **{song['title']}** will be added played next!"
+                    )
+                else:
+                    self.music_queue.append(
+                        [song, voice_channel, ctx.author.mention]
+                    )
+                    await ctx.send(
+                        f":headphones: **{song['title']}** will be played add the end of the queue!"
+                    )
 
-                self.music_queue.insert(
-                    0, [song, voice_channel, ctx.author.mention])
-
-                print(self.music_queue[0][0]["title"])
                 if self.is_playing == False or (
                     self.vc == "" or not self.vc.is_connected() or self.vc == None
                 ):
