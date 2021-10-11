@@ -14,6 +14,7 @@ class Music(commands.Cog):
         self.bot = bot
 
         self.is_playing = False
+        self.current_song = None
         self.music_queue = []
         self.skip_votes = set()
 
@@ -61,7 +62,7 @@ class Music(commands.Cog):
 
             m_url = self.music_queue[0][0]["source"]
 
-            self.music_queue.pop(0)
+            self.current_song = self.music_queue.pop(0)
 
             self.vc.play(
                 discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS),
@@ -69,6 +70,7 @@ class Music(commands.Cog):
             )
         else:
             self.is_playing = False
+            self.current_song = None
 
     async def play_music(self, ctx):
         if len(self.music_queue) > 0:
@@ -89,10 +91,11 @@ class Music(commands.Cog):
                 discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS),
                 after=lambda e: self.play_next(),
             )
-            self.music_queue.pop(0)
+            self.current_song = self.music_queue.pop(0)
 
         else:
             self.is_playing = False
+            self.current_song = None
 
     @commands.command(
         name="p",
@@ -122,14 +125,23 @@ class Music(commands.Cog):
                     await self.play_music(ctx)
 
     @commands.command(
+        name="cp",
+        help="Shows the currently playing song \U0001F440",
+        aliases=["playing"],
+    )
+    async def cp(self, ctx):
+        msg = "No music playing" if self.current_song is None else f"""Currently Playing: **{self.current_song[0]['title']}** -- added by {self.current_song[2]}\n"""
+        await ctx.send(msg)
+    
+    @commands.command(
         name="q",
         help="Shows the music added in list/queue \U0001F440",
         aliases=["queue"],
     )
     async def q(self, ctx):
         retval = ""
-        for i in range(0, len(self.music_queue)):
-            retval += f"""{i+1}. **{self.music_queue[i][0]['title']}** -- added by {self.music_queue[i][2]}\n"""
+        for (i, m) in enumerate(self.music_queue):
+            retval += f"""{i+1}. **{m[0]['title']}** -- added by {m[2]}\n"""
 
         if retval != "":
             await ctx.send(retval)

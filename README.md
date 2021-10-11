@@ -126,7 +126,8 @@ Go to the [Discord Developer Portal](https://discord.com/developers/docs/intro) 
 **You will currently need a discord role _DJ_ to use all the available commands**
 
 ```
- _p : Plays the song with search keyword following the command
+_p : Plays the song with search keyword following the command
+_cp: Shows the currently playing song
 _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
