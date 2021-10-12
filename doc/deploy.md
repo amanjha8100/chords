@@ -34,6 +34,7 @@ _p, _play : Plays the song with search keyword following the command
 _pn : Moves the song to the top of the queue
 _pause : Pause the currently playing song
 _resume : Resume the currently playing song
+_cp: Shows the currently playing song
 _q, _queue : Shows the music added in list/queue
 _cq _clear : Clears the entire queue of songs
 _shuffle : Shuffles the entire queue of songs
