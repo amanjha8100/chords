@@ -1,7 +1,6 @@
 @echo off
-set /p loc=Enter the full location to setup the things: 
+set /p loc=Enter the location of your reposiotry folder to setup the things: 
 cd %loc%
-git clone https://github.com/amanjha8100/chords.git
 
 echo Downlaoding python 3.9.7 ...
 powershell -Command "invoke-WebRequest https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe -Outfile python_installer.exe"
