@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-    <img src="https://i.imgur.com/P0yZRLA.png" alt="Logo" width="60%">
+    <img src="./Logo/icon.png" alt="Logo" width="40%">
 
   <h1 align="center">Chords</h1>
 
