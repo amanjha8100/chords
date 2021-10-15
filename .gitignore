@@ -3,8 +3,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-#app
-app.py
 # C extensions
 *.so
 
@@ -112,7 +110,7 @@ ENV/
 env.bak/
 venv.bak/
 vir/
-.env.sample
+
 #file
 tokens.txt
 
