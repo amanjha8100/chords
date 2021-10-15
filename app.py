@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv('.env.sample')
 
 intents = discord.Intents.default()
 intents.members = True
