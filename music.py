@@ -374,3 +374,4 @@ class Music(commands.Cog):
                     embed.set_thumbnail(url=data["thumbnail"]["genius"])
                     embed.set_author(name=data["author"])
                     await ctx.send(embed=embed)
+                    
