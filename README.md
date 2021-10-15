@@ -155,6 +155,7 @@ _s : Skips the currently playing music
 _r : removes song from queue at index given.
 _l : Commands the bot to leave the voice channel
 _help : shows all the commands of the bot.
+_rep : Repeats the current playing song
 ```
 
 <!-- ROADMAP -->
