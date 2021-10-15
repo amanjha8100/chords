@@ -334,7 +334,7 @@ class Music(commands.Cog):
                     await self.vc.move_to(self.music_queue[0][1])
 
                     await ctx.send(
-                        f""":arrow_forward: Replaying **{self.music_queue[0][0]['title']}** -- requested by {self.music_queue[0][2]}"""
+                        f""":repeat: Replaying **{self.music_queue[0][0]['title']}** -- requested by {self.music_queue[0][2]}"""
                     )
 
                     self.vc.play(
@@ -346,4 +346,4 @@ class Music(commands.Cog):
         else:
             self.is_playing = False
             self.current_song = None
-            await ctx.send("No music playing")
+            await ctx.send(f""":x: No music playing""")
