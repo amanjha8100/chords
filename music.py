@@ -132,16 +132,17 @@ class Music(commands.Cog):
     async def cp(self, ctx):
         msg = "No music playing" if self.current_song is None else f"""Currently Playing: **{self.current_song[0]['title']}** -- added by {self.current_song[2]}\n"""
         await ctx.send(msg)
-    
+
     @commands.command(
         name="q",
         help="Shows the music added in list/queue \U0001F440",
         aliases=["queue"],
     )
     async def q(self, ctx):
+        print(self.music_queue)
         retval = ""
         for (i, m) in enumerate(self.music_queue):
-            retval += f"""{i+1}. **{m[0]['title']}** -- added by {m[2]}\n"""
+            retval += f"""{i+1}. **{m[0]['title']}** -- added by {m[int(2)]}\n"""
 
         if retval != "":
             await ctx.send(retval)
@@ -221,11 +222,12 @@ class Music(commands.Cog):
                 voters = len(voice_channel.members)
                 voters = voters - 1 if self.vc else voters
                 result_vote_msg = await ctx.fetch_message(vote_message.id)
-                votes = next(react for react in result_vote_msg.reactions if str(react.emoji) == "\U0001F44D").count - 1
+                votes = next(react for react in result_vote_msg.reactions if str(
+                    react.emoji) == "\U0001F44D").count - 1
                 if votes >= voters / 2:
                     self.music_queue.insert(
                         0,
-                        [song, voice_channel,ctx.author.mention]
+                        [song, voice_channel, ctx.author.mention]
                     )
                     await ctx.send(
                         f":headphones: **{song['title']}** will be added played next!"
@@ -298,3 +300,50 @@ class Music(commands.Cog):
                 f""":x: Music at index {query} removed by {ctx.author.mention}"""
             )
             self.music_queue.pop(index)
+
+
+    @commands.command(
+        name="rep",
+        help="Restarts the current song. \U000027F2",
+        aliases=["restart"],
+    )
+    @commands.has_any_role(*voice_channel_moderator_roles)
+    async def restart(self, ctx):
+        song=[]
+        if(self.current_song != None):
+            song= self.current_song[0]
+            # print(song)
+            voice_channel = ctx.author.voice.channel
+            # print(voice_channel)
+            self.music_queue.insert(
+                0,
+                [song, voice_channel, ctx.author.mention]
+            )
+            # print(self.music_queue);
+            self.vc.stop()
+            # await self.play_music(ctx)
+            if len(self.music_queue) > 0:
+                self.is_playing = True
+
+                m_url = self.music_queue[0][0]["source"]
+
+                if self.vc == "" or not self.vc.is_connected() or self.vc == None:
+                    self.vc = await self.music_queue[0][1].connect()
+                    await ctx.send("No music added")
+                else:
+                    await self.vc.move_to(self.music_queue[0][1])
+
+                    await ctx.send(
+                        f""":repeat: Replaying **{self.music_queue[0][0]['title']}** -- requested by {self.music_queue[0][2]}"""
+                    )
+
+                    self.vc.play(
+                        discord.FFmpegPCMAudio(m_url, **self.FFMPEG_OPTIONS),
+                        after=lambda e: self.play_next(),
+                    )
+                    self.current_song = self.music_queue.pop(0)
+
+        else:
+            self.is_playing = False
+            self.current_song = None
+            await ctx.send(f""":x: No music playing""")
