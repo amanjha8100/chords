@@ -5,7 +5,7 @@ import discord
 from discord.ext import commands
 
 from dotenv import load_dotenv
-load_dotenv('.env.sample')
+load_dotenv()
 
 intents = discord.Intents.default()
 intents.members = True
@@ -19,5 +19,5 @@ bot = commands.Bot(command_prefix=prefix, intents=intents)
 bot.remove_command('help')
 bot.add_cog(Music(bot))
 bot.add_cog(Help(bot))
-# print(os.getenv('TOKEN'))
+
 bot.run(os.getenv("TOKEN"))
