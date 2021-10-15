@@ -8,6 +8,9 @@ from youtube_dl import YoutubeDL
 
 from roles import voice_channel_moderator_roles
 
+import aiohttp
+
+LYRICS= "https://some-random-api.ml/lyrics?title="
 
 class Music(commands.Cog):
     def __init__(self, bot):
@@ -343,3 +346,31 @@ class Music(commands.Cog):
             self.is_playing = False
             self.current_song = None
             await ctx.send(f""":x: No music playing""")
+    @commands.command(
+        name="lyrics",
+        help="Fetches lyrics for the Current Song. \U0001F3BC",
+        aliases=["lyric"]
+    )
+    @commands.has_any_role(*voice_channel_moderator_roles)
+    async def lyrics(self, ctx):
+        name = self.current_song[0]["title"]
+        async with ctx.typing():
+            async with aiohttp.request("GET", LYRICS + name, headers={}) as r:
+                if not 200 <= r.status <= 299:
+                    await ctx.send(
+                        f"Could not fetch lyrics for **{name}**. Error: {r.status}"
+                    )
+                else:
+                    data = await r.json()
+
+                    if len(data["lyrics"]) > 3000:
+                        return await ctx.send(f"<{data['links']['genius']}>")
+
+                    embed = discord.Embed(
+                        title=data["title"],
+                        description=data["lyrics"],
+                        colour=ctx.author.colour,
+                    )
+                    embed.set_thumbnail(url=data["thumbnail"]["genius"])
+                    embed.set_author(name=data["author"])
+                    await ctx.send(embed=embed)
