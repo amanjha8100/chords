@@ -74,14 +74,14 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-**You should have Python and FFmpeg installed in your system if not then don't worry the installation file will get you everything**
+  **You should have Python and FFmpeg installed in your system if not then don't worry the installation file will get you everything if you are using a windows machine**
 - Active internet connection through out installation (Must)
-- Python3   (Optional)
-- FFmpeg    (optional)
+- Python3   (Must for Other Users)
+- FFmpeg    (Must for Other Users)
 
-<img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/note.png" width="30px" height="30px" />
+<img align="left" src="https://github.com/sagarkumar3105/chords/blob/1bb1bd0e28adabdd1d76ee3bbbc40f3befc2314e/icon/1.png" width="30px" height="30px" />
 
-### Installation
+### Installation for Windows users
 
 1. Download the installation file from this [link](https://downgit.github.io/#/home?url=https://github.com/sagarkumar3105/chords/blob/e1d9a2aa24a5f2bca807466e3f08ee1eca72aa4e/installer.bat).
 2. Right click on the downlaoded file and run it as administrator.
@@ -96,7 +96,36 @@ To get a local copy up and running follow these simple steps.
    ```sh
    python app.py
    ```
+*\*Incase you are unable to install with above instructions then follow the Instructions for other users*
 
+<img align="left" src="https://github.com/sagarkumar3105/chords/blob/b29d6e853ad9a70a33efdffd4da4c7763b96cbb6/icon/linux-logo.png" width="30px" height="30px" />
+
+### Installation for other users
+
+1. Fork the project first
+
+2. Clone this repo on your local machine
+   ```sh
+   git clone https://github.com/amanjha8100/chords
+   ```
+3. In the project directory, install the packages using
+
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+4. Create a Bot from the Discord Developer Portal and copy the Bot token. Create a `.env` file and paste the Token.
+
+   ```sh
+   TOKEN = "Your Token"
+   ```
+
+5. Invite the Bot to your server and run
+
+   ```sh
+   python app.py
+   ```
+ 
 <!-- CONFIGURATION - DISCORD DEVELOPER PORTAL -->
 <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-steal.svg.png" width="50px" height="50px" />
 
