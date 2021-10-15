@@ -312,16 +312,12 @@ class Music(commands.Cog):
         song=[]
         if(self.current_song != None):
             song= self.current_song[0]
-            # print(song)
             voice_channel = ctx.author.voice.channel
-            # print(voice_channel)
             self.music_queue.insert(
                 0,
                 [song, voice_channel, ctx.author.mention]
             )
-            # print(self.music_queue);
             self.vc.stop()
-            # await self.play_music(ctx)
             if len(self.music_queue) > 0:
                 self.is_playing = True
 
