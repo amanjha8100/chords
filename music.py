@@ -53,8 +53,8 @@ class Music(commands.Cog):
                 ][0]
             except Exception:
                 return False
-
-        return {"source": info["formats"][0]["url"], "title": info["title"]}
+        length = info["end_time"] - info["start_time"]
+        return {"source": info["formats"][0]["url"], "title": info["title"], "song_length": length}
 
     def play_next(self):
         if len(self.music_queue) > 0:
@@ -343,3 +343,14 @@ class Music(commands.Cog):
             self.is_playing = False
             self.current_song = None
             await ctx.send(f""":x: No music playing""")
+
+    @commands.command(
+        name="qt",
+        help="Calculates and outputs the total length of the songs in the queue.",
+        aliases=["queuetime"],
+    )
+    async def qt(self, ctx):
+        remaining_time = 0
+        for song in self.music_queue:
+            remaining_time += song[0]['length']
+        await ctx.send(f"""The queue has a total of {remaining_time} minutes remaining!""")
