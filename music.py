@@ -352,4 +352,5 @@ class Music(commands.Cog):
         remaining_time = 0
         for song in self.music_queue:
             remaining_time += song[0]['song_length']
+            await ctx.send(f"""Song Length is {song[0]['song_length']} minutes.""")
         await ctx.send(f"""The queue has a total of {remaining_time} minutes remaining!""")
