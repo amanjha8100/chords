@@ -10,7 +10,8 @@ from roles import voice_channel_moderator_roles
 
 import aiohttp
 
-LYRICS= "https://some-random-api.ml/lyrics?title="
+LYRICS = "https://some-random-api.ml/lyrics?title="
+
 
 class Music(commands.Cog):
     def __init__(self, bot):
@@ -304,7 +305,6 @@ class Music(commands.Cog):
             )
             self.music_queue.pop(index)
 
-
     @commands.command(
         name="rep",
         help="Restarts the current song. \U000027F2",
@@ -312,9 +312,9 @@ class Music(commands.Cog):
     )
     @commands.has_any_role(*voice_channel_moderator_roles)
     async def restart(self, ctx):
-        song=[]
+        song = []
         if(self.current_song != None):
-            song= self.current_song[0]
+            song = self.current_song[0]
             voice_channel = ctx.author.voice.channel
             self.music_queue.insert(
                 0,
@@ -346,6 +346,7 @@ class Music(commands.Cog):
             self.is_playing = False
             self.current_song = None
             await ctx.send(f""":x: No music playing""")
+
     @commands.command(
         name="lyrics",
         help="Fetches lyrics for the Current Song. \U0001F3BC",
@@ -374,3 +375,27 @@ class Music(commands.Cog):
                     embed.set_thumbnail(url=data["thumbnail"]["genius"])
                     embed.set_author(name=data["author"])
                     await ctx.send(embed=embed)
+
+    @commands.command(
+        name="sleep",
+        help="Sets the bot to sleep. \U0001F4A4",
+        aliases=["timer"]
+    )
+    @commands.has_any_role(*voice_channel_moderator_roles)
+    async def sleep(self, ctx, second):
+        print(second)
+        seconds=(int)(second)
+        if seconds < 0:
+            await ctx.send("Time cannot be negative")
+        else:
+            message = await ctx.send("Timer set for : " + second + " seconds.")
+            while True:
+                seconds = seconds - 1
+                if(seconds == 0):
+                    await message.edit(new_content=("Ended!"))
+                    break
+                await message.edit(new_content=("Timer: {0}".format(seconds)))
+                await asyncio.sleep(1)
+            
+            await ctx.send(f''' **{ctx.message.author.mention} Sleep time exceeded! Bye-Bye!** :slight_smile: ''')
+            await self.vc.disconnect(force=True)
