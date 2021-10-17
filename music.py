@@ -357,4 +357,4 @@ class Music(commands.Cog):
         remaining_time = str(remaining_time%60)
         remaining_time = f"{remaining_time_minutes}:{remaining_time}"
         
-        await ctx.send(f"""The queue has a total of {remaining_time} minutes remaining!""")
+        await ctx.send(f"""The queue has a total of {remaining_time} remaining!""")
