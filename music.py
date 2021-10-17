@@ -53,8 +53,7 @@ class Music(commands.Cog):
                 ][0]
             except Exception:
                 return False
-        length = info["end_time"] - info["start_time"]
-        return {"source": info["formats"][0]["url"], "title": info["title"], "song_length": length, "song_max": info["end_time"], "song_beg":info["start_time"] }
+        return {"source": info["formats"][0]["url"], "title": info["title"], "song_length": info["duration"]}
 
     def play_next(self):
         if len(self.music_queue) > 0:
@@ -350,11 +349,6 @@ class Music(commands.Cog):
         aliases=["queuetime"],
     )
     async def qt(self, ctx):
-        remaining_time = 0
-        """DELETE BEFORE PUSH"""
-        for song in self.music_queue:
-            await ctx.send(f"""End time: {song[0]['song_max']} Start Time: {song[0]['song_beg']}""")
-        """DELETE BEFORE PUSH"""
         remaining_time = 0
         for song in self.music_queue:
             remaining_time += song[0]['length']
