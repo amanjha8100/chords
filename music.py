@@ -351,5 +351,5 @@ class Music(commands.Cog):
     async def qt(self, ctx):
         remaining_time = 0
         for song in self.music_queue:
-            remaining_time += song[0]['length']
+            remaining_time += song[0]['song_length']
         await ctx.send(f"""The queue has a total of {remaining_time} minutes remaining!""")
