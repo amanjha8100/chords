@@ -56,8 +56,7 @@ class Music(commands.Cog):
                 ][0]
             except Exception:
                 return False
-
-        return {"source": info["formats"][0]["url"], "title": info["title"]}
+        return {"source": info["formats"][0]["url"], "title": info["title"], "song_length": info["duration"]}
 
     def play_next(self):
         if len(self.music_queue) > 0:
@@ -346,6 +345,7 @@ class Music(commands.Cog):
             self.is_playing = False
             self.current_song = None
             await ctx.send(f""":x: No music playing""")
+<<<<<<< HEAD
     @commands.command(
         name="lyrics",
         help="Fetches lyrics for the Current Song. \U0001F3BC",
@@ -374,3 +374,21 @@ class Music(commands.Cog):
                     embed.set_thumbnail(url=data["thumbnail"]["genius"])
                     embed.set_author(name=data["author"])
                     await ctx.send(embed=embed)
+=======
+
+    @commands.command(
+        name="qt",
+        help="Calculates and outputs the total length of the songs in the queue.",
+        aliases=["queuetime"],
+    )
+    async def qt(self, ctx):
+        remaining_time = 0
+        for song in self.music_queue:
+            remaining_time += song[0]['song_length']
+
+        remaining_time_minutes = str(remaining_time//60)
+        remaining_time = str(remaining_time%60)
+        remaining_time = f"{remaining_time_minutes}:{remaining_time}"
+        
+        await ctx.send(f"""The queue has a total of {remaining_time} remaining!""")
+>>>>>>> d5e9cf6fe765dbef22356366875eca3519a63071
