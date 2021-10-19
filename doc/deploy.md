@@ -47,4 +47,4 @@ _h, _help : shows all the commands of the bot.
 _rep : Repeats the current playing song
 ```
 
-Working on more **new features** such as **resume**, **clearqueue** as I build more.
+Working on more **new features** such as **seek**, **clearqueue** as I build more.
