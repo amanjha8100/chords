@@ -142,8 +142,6 @@ Go to the [Discord Developer Portal](https://discord.com/developers/docs/intro) 
 
 ## Available Bot Commands
 
-**You will currently need a discord role _DJ_ to use all the available commands**
-
 ```
 _p : Plays the song with search keyword following the command
 _cp: Shows the currently playing song
@@ -158,6 +156,30 @@ _l : Commands the bot to leave the voice channel
 _help : shows all the commands of the bot.
 _rep : Repeats the current playing song
 ```
+<!-- REQUIRED ROLES -->
+ <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-submerge.svg.png" width="50px" height="50px"  />
+
+## Required roles
+
+To run some of the commands, the user must have some specific roles. The following table illustrates the roles which are necessary for running specific commands. If a command is ticked for more than one role, then this means that both roles have the permission for running the command.
+
+| Command | DJ  |
+|:-|:-:|
+| `play` | |
+| `playing` | |
+| `queue` | |
+| `clear` | |
+| `shuffle` | |
+| `skip` | |
+| `voteskip` | |
+| `leave` | :white_check_mark: |
+| `pn` | :white_check_mark: |
+| `pause` | :white_check_mark: |
+| `resume` | :white_check_mark: |
+| `remove` | :white_check_mark: |
+| `restart` | :white_check_mark: |
+| `queuetime` | :white_check_mark: |
+| `help` | |
 
 <!-- ROADMAP -->
  <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-drop.svg.png" width="50px" height="50px"  />
