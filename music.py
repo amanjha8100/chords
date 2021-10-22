@@ -15,7 +15,7 @@ LYRICS= "https://some-random-api.ml/lyrics?title="
 class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
+        self.isTimed = False
         self.is_playing = False
         self.current_song = None
         self.music_queue = []
@@ -361,3 +361,61 @@ class Music(commands.Cog):
         remaining_time = f"{remaining_time_minutes}:{remaining_time}"
         
         await ctx.send(f"""The queue has a total of {remaining_time} remaining!""")
+    @commands.command(
+        name="sleep",
+        help="Sets the bot to sleep. \U0001F4A4",
+        aliases=["timer"]
+    )
+    @commands.has_any_role(*voice_channel_moderator_roles)
+    async def sleep(self, ctx, *args):
+        second=int(0);
+        query = list(args)
+        # for i in range(len(query)):
+        #     print(type(query[i]))
+        if self.is_playing == False:
+            return await ctx.send(f"No music playing")
+
+        if len(query) == 0 and self.isTimed:
+                self.isTimed = False
+                return
+        elif(len(query) == 2 and not self.isTimed):
+            try:
+                if query[0] == "m" :
+                    second = int(query[1]) * 60
+                elif query[0] == "h":
+                    second = int(query[1]) * 3600
+                elif query[0] == "s":
+                    second = int(query[1])
+                else:
+                    await ctx.send("Invalid time format.")
+                    return
+            except:
+                await ctx.send("Invalid time specified")
+                return
+        elif len(query) == 2 and self.isTimed:
+            await ctx.send("Timer already set. Unset to reset.")
+            return
+        else:
+            await ctx.send("Invalid time format.")
+            return
+        seconds=f'{second}'
+        if second < 0:
+            await ctx.send("Time cannot be negative")
+        else:
+            self.isTimed = True
+            message = await ctx.send("Timer set for : " + seconds + " seconds.")
+            while True and self.isTimed:
+                second = second - 1
+                print(self.isTimed)
+                if(second == 0):
+                    await message.edit(new_content=("Ended!"))
+                    break
+                await message.edit(new_content=("Timer: {0}".format(second)))
+                await asyncio.sleep(1)
+            
+            if self.isTimed == False:
+                await ctx.send("Timer disabled.")
+            else:            
+                await ctx.send(f''' **{ctx.message.author.mention} Sleep time exceeded! Bye-Bye!** :slight_smile: ''')
+                self.isTimed = False
+                await self.vc.disconnect(force=True)
