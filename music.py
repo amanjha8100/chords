@@ -8,9 +8,6 @@ from youtube_dl import YoutubeDL
 
 from roles import voice_channel_moderator_roles
 
-import aiohttp
-
-LYRICS= "https://some-random-api.ml/lyrics?title="
 
 class Music(commands.Cog):
     def __init__(self, bot):
@@ -361,6 +358,7 @@ class Music(commands.Cog):
         remaining_time = f"{remaining_time_minutes}:{remaining_time}"
         
         await ctx.send(f"""The queue has a total of {remaining_time} remaining!""")
+        
     @commands.command(
         name="sleep",
         help="Sets the bot to sleep. \U0001F4A4",
