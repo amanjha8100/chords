@@ -368,8 +368,6 @@ class Music(commands.Cog):
     async def sleep(self, ctx, *args):
         second=int(0);
         query = list(args)
-        # for i in range(len(query)):
-        #     print(type(query[i]))
         if self.is_playing == False:
             return await ctx.send(f"No music playing")
 
@@ -404,7 +402,6 @@ class Music(commands.Cog):
             message = await ctx.send("Timer set for : " + seconds + " seconds.")
             while True and self.isTimed:
                 second = second - 1
-                print(self.isTimed)
                 if(second == 0):
                     await message.edit(new_content=("Ended!"))
                     break
