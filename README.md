@@ -155,6 +155,7 @@ _r : removes song from queue at index given.
 _l : Commands the bot to leave the voice channel
 _help : shows all the commands of the bot.
 _rep : Repeats the current playing song
+_sleep : To set timer.
 ```
 <!-- REQUIRED ROLES -->
  <img align="left" src="https://github.com/Yoda-Canada/chords/blob/issue-32/icon/Toicon-icon-fandom-submerge.svg.png" width="50px" height="50px"  />
