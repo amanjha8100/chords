@@ -129,7 +129,7 @@ class Music(commands.Cog):
         aliases=["playing"],
     )
     async def cp(self, ctx):
-        msg = "No music playing" if self.current_song is None else f"""Currently Playing: **{self.current_song[0]['title']}** -- added by {self.current_song[2]}\n"""
+        msg = "No music playing" if self.current_song is None else f"""Currently Playing: **{self.current_song[0]['title']}** \n"""
         await ctx.send(msg)
 
     @commands.command(
@@ -141,7 +141,7 @@ class Music(commands.Cog):
         print(self.music_queue)
         retval = ""
         for (i, m) in enumerate(self.music_queue):
-            retval += f"""{i+1}. **{m[0]['title']}** -- added by {m[int(2)]}\n"""
+            retval += f"""{i+1}. **{m[0]['title']}** \n"""
 
         if retval != "":
             await ctx.send(retval)
