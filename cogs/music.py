@@ -1,12 +1,11 @@
 import asyncio
 import discord
 from discord.ext import commands
-from discord.ext.commands.core import command
 
 from random import shuffle
 from youtube_dl import YoutubeDL
 
-from roles import voice_channel_moderator_roles
+from cogs.utils.roles import voice_channel_moderator_roles
 
 
 class Music(commands.Cog):
@@ -420,3 +419,7 @@ class Music(commands.Cog):
                 )
                 self.isTimed = False
                 await self.vc.disconnect(force=True)
+
+
+def setup(bot):
+    bot.add_cog(Music(bot))

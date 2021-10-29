@@ -46,3 +46,7 @@ class Help(commands.Cog):
             name="Developer:", value="Aman Prakash Jha \U0001F525", inline=False
         )
         await ctx.send(embed=cog_help_embed)
+
+
+def setup(bot):
+    bot.add_cog(Help(bot))
