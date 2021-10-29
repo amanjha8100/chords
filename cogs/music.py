@@ -1,12 +1,11 @@
 import asyncio
 import discord
 from discord.ext import commands
-from discord.ext.commands.core import command
 
 from random import shuffle
 from youtube_dl import YoutubeDL
 
-from roles import voice_channel_moderator_roles
+from cogs.utils.roles import voice_channel_moderator_roles
 
 
 class Music(commands.Cog):
@@ -53,7 +52,11 @@ class Music(commands.Cog):
                 ][0]
             except Exception:
                 return False
-        return {"source": info["formats"][0]["url"], "title": info["title"], "song_length": info["duration"]}
+        return {
+            "source": info["formats"][0]["url"],
+            "title": info["title"],
+            "song_length": info["duration"],
+        }
 
     def play_next(self):
         if len(self.music_queue) > 0:
@@ -83,7 +86,7 @@ class Music(commands.Cog):
                 await self.vc.move_to(self.music_queue[0][1])
 
             await ctx.send(
-                f""":arrow_forward: Playing **{self.music_queue[0][0]['title']}** -- requested by {self.music_queue[0][2]}"""
+                f""":arrow_forward: Playing **{self.music_queue[0][0]['title']}** -- requested by `{self.music_queue[0][2]}`"""
             )
 
             self.vc.play(
@@ -117,8 +120,7 @@ class Music(commands.Cog):
                 await ctx.send(
                     f""":headphones: **{song["title"]}** has been added to the queue by {ctx.author.mention}"""
                 )
-                self.music_queue.append(
-                    [song, voice_channel, ctx.author.mention])
+                self.music_queue.append([song, voice_channel, ctx.author.mention])
 
                 if self.is_playing == False:
                     await self.play_music(ctx)
@@ -129,7 +131,11 @@ class Music(commands.Cog):
         aliases=["playing"],
     )
     async def cp(self, ctx):
-        msg = "No music playing" if self.current_song is None else f"""Currently Playing: **{self.current_song[0]['title']}** \n"""
+        msg = (
+            "No music playing"
+            if self.current_song is None
+            else f"""Currently Playing: **{self.current_song[0]['title']}** -- added by `{self.current_song[2]}`\n"""
+        )
         await ctx.send(msg)
 
     @commands.command(
@@ -221,20 +227,23 @@ class Music(commands.Cog):
                 voters = len(voice_channel.members)
                 voters = voters - 1 if self.vc else voters
                 result_vote_msg = await ctx.fetch_message(vote_message.id)
-                votes = next(react for react in result_vote_msg.reactions if str(
-                    react.emoji) == "\U0001F44D").count - 1
+                votes = (
+                    next(
+                        react
+                        for react in result_vote_msg.reactions
+                        if str(react.emoji) == "\U0001F44D"
+                    ).count
+                    - 1
+                )
                 if votes >= voters / 2:
                     self.music_queue.insert(
-                        0,
-                        [song, voice_channel, ctx.author.mention]
+                        0, [song, voice_channel, ctx.author.mention]
                     )
                     await ctx.send(
                         f":headphones: **{song['title']}** will be added played next!"
                     )
                 else:
-                    self.music_queue.append(
-                        [song, voice_channel, ctx.author.mention]
-                    )
+                    self.music_queue.append([song, voice_channel, ctx.author.mention])
                     await ctx.send(
                         f":headphones: **{song['title']}** will be played add the end of the queue!"
                     )
@@ -300,7 +309,6 @@ class Music(commands.Cog):
             )
             self.music_queue.pop(index)
 
-
     @commands.command(
         name="rep",
         help="Restarts the current song. \U000027F2",
@@ -308,14 +316,11 @@ class Music(commands.Cog):
     )
     @commands.has_any_role(*voice_channel_moderator_roles)
     async def restart(self, ctx):
-        song=[]
-        if(self.current_song != None):
-            song= self.current_song[0]
+        song = []
+        if self.current_song != None:
+            song = self.current_song[0]
             voice_channel = ctx.author.voice.channel
-            self.music_queue.insert(
-                0,
-                [song, voice_channel, ctx.author.mention]
-            )
+            self.music_queue.insert(0, [song, voice_channel, ctx.author.mention])
             self.vc.stop()
             if len(self.music_queue) > 0:
                 self.is_playing = True
@@ -351,32 +356,30 @@ class Music(commands.Cog):
     async def qt(self, ctx):
         remaining_time = 0
         for song in self.music_queue:
-            remaining_time += song[0]['song_length']
+            remaining_time += song[0]["song_length"]
 
-        remaining_time_minutes = str(remaining_time//60)
-        remaining_time = str(remaining_time%60)
+        remaining_time_minutes = str(remaining_time // 60)
+        remaining_time = str(remaining_time % 60)
         remaining_time = f"{remaining_time_minutes}:{remaining_time}"
-        
+
         await ctx.send(f"""The queue has a total of {remaining_time} remaining!""")
-        
+
     @commands.command(
-        name="sleep",
-        help="Sets the bot to sleep. \U0001F4A4",
-        aliases=["timer"]
+        name="sleep", help="Sets the bot to sleep. \U0001F4A4", aliases=["timer"]
     )
     @commands.has_any_role(*voice_channel_moderator_roles)
     async def sleep(self, ctx, *args):
-        second=int(0);
+        second = int(0)
         query = list(args)
         if self.is_playing == False:
             return await ctx.send(f"No music playing")
 
         if len(query) == 0 and self.isTimed:
-                self.isTimed = False
-                return
-        elif(len(query) == 2 and not self.isTimed):
+            self.isTimed = False
+            return
+        elif len(query) == 2 and not self.isTimed:
             try:
-                if query[0] == "m" :
+                if query[0] == "m":
                     second = int(query[1]) * 60
                 elif query[0] == "h":
                     second = int(query[1]) * 3600
@@ -394,7 +397,7 @@ class Music(commands.Cog):
         else:
             await ctx.send("Invalid time format.")
             return
-        seconds=f'{second}'
+        seconds = f"{second}"
         if second < 0:
             await ctx.send("Time cannot be negative")
         else:
@@ -402,15 +405,21 @@ class Music(commands.Cog):
             message = await ctx.send("Timer set for : " + seconds + " seconds.")
             while True and self.isTimed:
                 second = second - 1
-                if(second == 0):
+                if second == 0:
                     await message.edit(new_content=("Ended!"))
                     break
                 await message.edit(new_content=("Timer: {0}".format(second)))
                 await asyncio.sleep(1)
-            
+
             if self.isTimed == False:
                 await ctx.send("Timer disabled.")
-            else:            
-                await ctx.send(f''' **{ctx.message.author.mention} Sleep time exceeded! Bye-Bye!** :slight_smile: ''')
+            else:
+                await ctx.send(
+                    f""" **{ctx.message.author.mention} Sleep time exceeded! Bye-Bye!** :slight_smile: """
+                )
                 self.isTimed = False
                 await self.vc.disconnect(force=True)
+
+
+def setup(bot):
+    bot.add_cog(Music(bot))
