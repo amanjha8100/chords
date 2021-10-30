@@ -101,7 +101,7 @@ class Music(commands.Cog):
 
     @commands.command(
         name="p",
-        help="Plays a selected song from youtube \U0001F3B5",
+        help="Memutar lagu dari youtube. \U0001F3B5",
         aliases=["play"],
     )
     async def p(self, ctx, *args):
@@ -114,11 +114,11 @@ class Music(commands.Cog):
             song = self.search_yt(query)
             if type(song) == type(True):
                 await ctx.send(
-                    "Could not download the song. Incorrect format try another keyword."
+                    "Tidak bisa mengunduh lagu. Kesahalan format, coba keyword lain."
                 )
             else:
                 await ctx.send(
-                    f""":headphones: **{song["title"]}** has been added to the queue by {ctx.author.mention}"""
+                    f""":headphones: **{song["title"]}** telah ditambahkan ke antrian oleh {ctx.author.mention}."""
                 )
                 self.music_queue.append([song, voice_channel, ctx.author.mention])
 
@@ -127,20 +127,20 @@ class Music(commands.Cog):
 
     @commands.command(
         name="cp",
-        help="Shows the currently playing song \U0001F440",
+        help="Menunjukkan lagu yang sedang diputar. \U0001F440",
         aliases=["playing"],
     )
     async def cp(self, ctx):
         msg = (
-            "No music playing"
+            "Tidak ada musik yang sedang diputar."
             if self.current_song is None
-            else f"""Currently Playing: **{self.current_song[0]['title']}** -- added by `{self.current_song[2]}`\n"""
+            else f"""Sedang memainkan: **{self.current_song[0]['title']}** -- ditambahkan oleh `{self.current_song[2]}`\n"""
         )
         await ctx.send(msg)
 
     @commands.command(
         name="q",
-        help="Shows the music added in list/queue \U0001F440",
+        help="Menunjukkan lagu yang telah ditambahkan ke antrian. \U0001F440",
         aliases=["queue"],
     )
     async def q(self, ctx):
@@ -152,31 +152,40 @@ class Music(commands.Cog):
         if retval != "":
             await ctx.send(retval)
         else:
-            await ctx.send("No music in queue")
-
-    @commands.command(name="cq", help="Clears the queue", aliases=["clear"])
-    async def cq(self, ctx):
-        self.music_queue = []
-        await ctx.send("""***Queue cleared !***""")
-
-    @commands.command(name="shuffle", help="Shuffles the queue")
-    async def shuffle(self, ctx):
-        shuffle(self.music_queue)
-        await ctx.send("""***Queue shuffled !***""")
+            await ctx.send("Antrian kosong.")
 
     @commands.command(
-        name="s", help="Skips the current song being played", aliases=["skip"]
+        name="cq", 
+        help="Menghapus antrian.", 
+        aliases=["clear"]
+    )
+    async def cq(self, ctx):
+        self.music_queue = []
+        await ctx.send("""***Antrian telah dihapus !***""")
+
+    @commands.command(
+        name="shuffle", 
+        help="Mengacak antrian"
+    )
+    async def shuffle(self, ctx):
+        shuffle(self.music_queue)
+        await ctx.send("""***Antrian telah diacak !***""")
+
+    @commands.command(
+        name="s", 
+        help="Melewati lagu yang sedang diputar.", 
+        aliases=["skip"]
     )
     async def skip(self, ctx):
         if self.vc != "" and self.vc:
-            await ctx.send("""***Skipped current song !***""")
+            await ctx.send("""***Lagu dilewati !***""")
             self.skip_votes = set()
             self.vc.stop()
             await self.play_music(ctx)
 
     @commands.command(
         name="voteskip",
-        help="Vote to skip the current song being played",
+        help="Vote untuk melewati lagu yang sedang diputar.",
         aliases=["vs"],
     )
     async def voteskip(self, ctx):
@@ -191,7 +200,7 @@ class Music(commands.Cog):
 
     @commands.command(
         name="l",
-        help="Commands the bot to leave the voice channel \U0001F634",
+        help="Perintah agar bot meninggalkan channel. \U0001F634",
         aliases=["leave"],
     )
     @commands.has_any_role(*voice_channel_moderator_roles)
@@ -201,7 +210,8 @@ class Music(commands.Cog):
             await self.vc.disconnect(force=True)
 
     @commands.command(
-        name="pn", help="Moves the song to the top of the queue \U0001F4A5"
+        name="pn", 
+        help="Memindahkan lagu ke puncak antrian. \U0001F4A5"
     )
     @commands.has_any_role(*voice_channel_moderator_roles)
     async def playnext(self, ctx, *args):
@@ -255,37 +265,43 @@ class Music(commands.Cog):
 
     """Pause the currently playing song."""
 
-    @commands.command(name="pause", help="Pause the currently playing song")
+    @commands.command(
+        name="pause", 
+        help="Pause lagu yang sedang diputar."
+    )
     @commands.has_any_role(*voice_channel_moderator_roles)
     async def pause(self, ctx):
         vc = ctx.voice_client
 
         if not vc or not vc.is_playing():
-            return await ctx.send("I am currently playing nothing!", delete_after=20)
+            return await ctx.send("Tidak ada lagu yang sedang diputar!", delete_after=20)
         elif vc.is_paused():
             return
 
         vc.pause()
-        await ctx.send(f":pause_button:  {ctx.author.mention} Paused the song!")
+        await ctx.send(f":pause_button:  {ctx.author.mention} Lagu telah di-*pause*!")
 
     """Resume the currently playing song."""
 
-    @commands.command(name="resume", help="Resume the currently playing song")
+    @commands.command(
+        name="resume", 
+        help="Melanjutkan lagu yang sedang diputar."
+    )
     @commands.has_any_role(*voice_channel_moderator_roles)
     async def resume(self, ctx):
         vc = ctx.voice_client
 
         if not vc or vc.is_playing():
-            return await ctx.send("I am already playing a song!", delete_after=20)
+            return await ctx.send("Lagu memang sudah diputar!", delete_after=20)
         elif not vc.is_paused():
             return
 
         vc.resume()
-        await ctx.send(f":play_pause:  {ctx.author.mention} Resumed the song!")
+        await ctx.send(f":play_pause:  {ctx.author.mention} Lagu dilanjutkan!")
 
     @commands.command(
         name="r",
-        help="removes song from queue at index given. \U0001F4A9",
+        help="Menghapus lagu dari antrian sesuai nomor. \U0001F4A9",
         aliases=["remove"],
     )
     @commands.has_any_role(*voice_channel_moderator_roles)
@@ -311,7 +327,7 @@ class Music(commands.Cog):
 
     @commands.command(
         name="rep",
-        help="Restarts the current song. \U000027F2",
+        help="Mengulangi lagu yang sedang diputar. \U000027F2",
         aliases=["restart"],
     )
     @commands.has_any_role(*voice_channel_moderator_roles)
@@ -334,7 +350,7 @@ class Music(commands.Cog):
                     await self.vc.move_to(self.music_queue[0][1])
 
                     await ctx.send(
-                        f""":repeat: Replaying **{self.music_queue[0][0]['title']}** -- requested by {self.music_queue[0][2]}"""
+                        f""":repeat: Replaying **{self.music_queue[0][0]['title']}** -- requested by `{self.music_queue[0][2]}`"""
                     )
 
                     self.vc.play(
@@ -350,7 +366,7 @@ class Music(commands.Cog):
 
     @commands.command(
         name="qt",
-        help="Calculates and outputs the total length of the songs in the queue.",
+        help="Menghitung lama antrian.",
         aliases=["queuetime"],
     )
     async def qt(self, ctx):
@@ -365,7 +381,9 @@ class Music(commands.Cog):
         await ctx.send(f"""The queue has a total of {remaining_time} remaining!""")
 
     @commands.command(
-        name="sleep", help="Sets the bot to sleep. \U0001F4A4", aliases=["timer"]
+        name="sleep", 
+        help="Mengatur bot untuk tidur. \U0001F4A4", 
+        aliases=["timer"]
     )
     @commands.has_any_role(*voice_channel_moderator_roles)
     async def sleep(self, ctx, *args):

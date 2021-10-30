@@ -9,7 +9,10 @@ class Help(commands.Cog):
         self.bot = bot
         self.bot_cogs = self.bot.cogs
 
-    @commands.command(name="help", aliases=["h"])
+    @commands.command(
+        name="help", 
+        aliases=["h"]
+    )
     async def _help(self, ctx, cog_query: str = "Music"):
         """Returns all not hidden commands from a cog.
         Default query is set to 'Music' but other cogs are supported too"""
@@ -44,6 +47,10 @@ class Help(commands.Cog):
 
         cog_help_embed.add_field(
             name="Developer:", value="Aman Prakash Jha \U0001F525", inline=False
+        )
+    
+        cog_help_embed.add_field(
+            name="Lokalisasi:", value="fka", inline=False
         )
         await ctx.send(embed=cog_help_embed)
 
